@@ -7,10 +7,10 @@
 <body>
 <h1>Countdown</h1>
 <form action="">
-    <input type="text" id="hh" value="0">
+    <input type="text" id="hh" value="0" autofocus>
     <input type="text" id="mm" value="1">
     <input type="text" id="ss" value="1">
-    <input type="button" name="start" onclick="startCountdown()">
+    <input type="button" value="Start" onclick="startCountdown()">
 </form>
 <p id="output"></p>
 <script>
@@ -18,7 +18,6 @@
     var targetTime;var timer;
     
     function startCountdown() {
-        
         
         timer = null;
         
