@@ -5,6 +5,4 @@
  * Time: 20:53
  */
 
-sleep(10);
-
-echo "Result: " . rand(0, 100) . " - " . date("Y-m-d");
+echo date("Y-m-d H:i:s");

@@ -10,15 +10,32 @@
 
 <script>
 
+    var locked = false;
+    
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function(){
-        if (this.readyState === 4 && this.status === 200) {
-            document.getElementById("foo").outerHTML = this.responseText;
+
+    xhttp.onreadystatechange = function()
+    {
+        if (this.readyState === 4 && this.status === 200)
+        {
+            document.getElementById("foo").innerHTML = this.responseText;
+            locked = false;
         }
-        setTimeout(xhttp.send, 1000);
     };
-    xhttp.open("GET", "ajaxServer.php", true);
-    xhttp.send();
+    
+    function loadData () {
+        
+        if (locked)
+            return;
+        
+        locked = true;
+
+
+        xhttp.open("GET", "ajaxServer.php", true);
+        xhttp.send();
+    }
+
+    setInterval(loadData, 50);
 
 </script>
 
