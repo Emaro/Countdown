@@ -22,6 +22,10 @@
 
     function startCountdown() {
 
+        requestNotificationPermisson();
+        notify();
+        
+        
         timer = null;
 
         targetTime = new Date().getTime();
@@ -59,6 +63,27 @@
 
     function pad(n) {
         return (n < 10) ? ("0" + n) : n;
+    }
+
+    function requestNotificationPermisson() {
+        if ("Notification" in Window && Notification.permission === "default") {
+            console.log("Not in win");
+            Notification.requestPermission(function (permission) {
+                // If the user accepts, let's create a notification
+                if (permission === "granted") {
+                    var notification = new Notification("Hi there!");
+                }
+            });
+        }
+        else if (Notification.permission === "granted") {
+            console.log("Granted");
+            var notification = new Notification("Hi there!");
+        }
+    }
+    
+    function notify() {
+        console.log("Notify");
+        var notification = new Notification("Hi there!");
     }
 
 </script>
