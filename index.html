@@ -8,26 +8,20 @@
 
 <form action="">
     <input id="hh" value="0" autofocus>
-    <input id="mm" value="1">
+    <input id="mm" value="25">
     <input id="ss" value="0">
     <input type="button" value="Start" onclick="startCountdown()">
 </form>
 
 <p id="output"></p>
 
-
-<button onclick="notifyMe()">Notify me!</button>
-
 <script>
 
     var targetTime;
     var timer;
+    var ms;
 
     function startCountdown() {
-
-        requestNotificationPermisson();
-        notify();
-        
         
         timer = null;
 
@@ -36,6 +30,8 @@
         targetTime += parseInt(document.getElementById("mm").value) * 60 * 1000;
         targetTime += parseInt(document.getElementById("ss").value) * 1000;
 
+        ms = targetTime;
+        
         targetTime = new Date(targetTime);
 
         countToZero();
@@ -61,7 +57,7 @@
         if (saveDif <= 100) {
             dif = 0;
             document.getElementById("output").innerHTML = pad(dif) + ":" + pad(dif) + ":" + pad(dif);
-            alert("Countdown finished");
+            notifyMe();
             clearInterval(timer);
         }
     }
@@ -70,32 +66,12 @@
         return (n < 10) ? ("0" + n) : n;
     }
 
-    function requestNotificationPermisson() {
-        if ("Notification" in Window && Notification.permission === "default") {
-            console.log("Not in win");
-            Notification.requestPermission(function (permission) {
-                // If the user accepts, let's create a notification
-                if (permission === "granted") {
-                    var notification = new Notification("Hi there!");
-                }
-            });
-        }
-        else if (Notification.permission === "granted") {
-            console.log("Granted");
-            var notification = new Notification("Hi there!");
-        }
-    }
-    
-    function notify() {
-        console.log("Notify");
-        var notification = new Notification("Hi there!");
-    }
-
+  
 
     // request permission on page load
     document.addEventListener('DOMContentLoaded', function () {
         if (!Notification) {
-            alert('Desktop notifications not available in your browser. Try Chromium.');
+            alert('Desktop notifications not available in your browser.');
             return;
         }
 
@@ -105,15 +81,24 @@
 
     function notifyMe() {
         if (Notification.permission !== "granted")
-            Notification.requestPermission();
+            // Notification.requestPermission();
+            alert("Countdown finished");
         else {
-            var notification = new Notification('Notification title', {
-                icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-                body: "Hey there! You've been notified!",
+            var dif = ms;
+            dif /= 1000; // s
+            var sec = Math.floor(dif % 60);
+            dif /= 60; // m
+            var min = Math.floor(dif % 60);
+            dif /= 60 // h;
+            var hour = Math.floor(dif);
+            
+            var notification = new Notification('Countdown finished', {
+                icon: '',
+                body: "The " + pad(hour) + "h, " + pad(min) + "m and " + pad(sec) + "s are over",
             });
 
             notification.onclick = function () {
-                window.open("http://stackoverflow.com/a/13328397/1269037");
+                window.open("");
             };
 
         }
