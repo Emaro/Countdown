@@ -26,11 +26,12 @@
         timer = null;
 
         targetTime = new Date().getTime();
-        targetTime += parseInt(document.getElementById("hh").value) * 60 * 60 * 1000;
-        targetTime += parseInt(document.getElementById("mm").value) * 60 * 1000;
-        targetTime += parseInt(document.getElementById("ss").value) * 1000;
+        
+        ms = parseInt(document.getElementById("hh").value) * 60 * 60 * 1000;
+        ms += parseInt(document.getElementById("mm").value) * 60 * 1000;
+        ms += parseInt(document.getElementById("ss").value) * 1000;
 
-        ms = targetTime;
+        targetTime += ms;
         
         targetTime = new Date(targetTime);
 
@@ -93,8 +94,8 @@
             var hour = Math.floor(dif);
             
             var notification = new Notification('Countdown finished', {
-                icon: '',
-                body: "The " + pad(hour) + "h, " + pad(min) + "m and " + pad(sec) + "s are over",
+                icon: './favicon-96x96.png',
+                body: /*"The " + pad(hour) + "h, " + pad(min) + "m and " + pad(sec) + "s are over"*/"",
             });
 
             notification.onclick = function () {
