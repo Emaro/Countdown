@@ -1,165 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<!-- HEAD -->
 
 <meta charset="UTF-8">
 <title>Countdown</title>
-<style>
-    *{
-        font-family: Georgia;
-    }
-    
-    body
-    {
-        font-size: 200%;
-        width: 50%;
-        margin: auto;
-        align-content: center;
-        text-align: center;
-        height: 50%;
-        vertical-align: baseline;
-        top: 30%;
-        left: 50%;
-        position : absolute;
-        transform: translate(-50%,-50%);
-    }
-    
-    .clock
-    {
-        border: none;
-        outline: none;
-        width: 2ch;
-        font-size: 1em;
-        box-sizing: content-box;
-        text-align: center;
-        /*background-color: lightblue;*/
-        padding: 5px 15px 10px 15px;
-    }
-    #output{
-        font-size: 4em;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        min-width: 500px;
-        letter-spacing: 0.2ch;
-    }
-    
-    span
-    {
-        display: inline-block;
-        /*min-width: 2.35ch;*/
-        text-align: center;
-    }
-    
-    input[type=button]{
-        font-size: 1rem;
-        padding: 0.3rem 0.8rem;
-    }
-    
-    #inp
-    {
-      border-bottom: solid 1px black    ;
-    }
-    
-</style>
+<link rel="stylesheet" href="index.css">
+
+<script src="index.js" defer></script>
+
+
+<!-- BODY -->
 
 <h1>Countdown</h1>
-<!--
-<p id="output"><span id="1"></span>:<span id="2"></span>:<span id="3"></span></p>-->
+
 <p id="output">&nbsp;</p>
+
 <form action="">
     <span id="inp"><input class="clock" id="hh" value="" autofocus>:<input class="clock" id="mm" value="25">:<input class="clock" id="ss" value="0"></span><br>
     <input type="button" value="Go" onclick="startCountdown()">
 </form>
-
-
-<script>
-
-    var targetTime;
-    var timer;
-    var ms;
-
-    function startCountdown() {
-        
-        timer = null;
-
-        targetTime = new Date().getTime();
-        
-        var hh = parseInt(document.getElementById("hh").value);
-        hh = isNaN(hh) ? 0 : hh;
-        
-        ms = hh  * 60 * 60 * 1000;
-        ms += parseInt(document.getElementById("mm").value) * 60 * 1000;
-        ms += parseInt(document.getElementById("ss").value) * 1000;
-
-        targetTime += ms;
-        
-        targetTime = new Date(targetTime);
-
-        countToZero();
-
-        timer = setInterval(countToZero, 100);
-    }
-
-    function countToZero() {
-
-        var dif = targetTime - new Date(); // ms
-
-        var saveDif = dif;
-
-        dif /= 1000; // s
-        var sec = Math.floor(dif % 60);
-        dif /= 60; // m
-        var min = Math.floor(dif % 60);
-        dif /= 60 // h;
-        var hour = Math.floor(dif);
-
-        document.getElementById("output").innerHTML = pad(hour) + ":" + pad(min) + ":" + pad(sec);
-        /*document.getElementById("1").innerHTML = pad(hour) ;
-        document.getElementById("2").innerHTML =pad(min) ;
-        document.getElementById("3").innerHTML =  pad(sec);*/
-
-        if (saveDif <= 100) {
-            dif = 0;
-            document.getElementById("output").innerHTML = pad(dif) + ":" + pad(dif) + ":" + pad(dif);
-            notifyMe();
-            clearInterval(timer);
-        }
-    }
-
-    function pad(n) {
-        return (n < 10) ? ("0" + n) : n;
-    }
-
-  
-
-    // request permission on page load
-    document.addEventListener('DOMContentLoaded', function () {
-        if (!Notification) {
-            alert('Desktop notifications not available in your browser.');
-            return;
-        }
-
-        if (Notification.permission !== "granted")
-            Notification.requestPermission();
-    });
-
-    function notifyMe() {
-        if (Notification.permission !== "granted")
-            // Notification.requestPermission();
-            alert("Countdown finished");
-        else {
-            
-            var notification = new Notification('Countdown finished', {
-                icon: './favicon-96x96.png',
-                body: "",
-            });
-
-            notification.onclick = function () {
-                window.open("");
-            };
-
-        }
-
-    }
-</script>
-</html>

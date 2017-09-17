@@ -1,0 +1,55 @@
+*{
+    font-family: Georgia;
+}
+
+body
+{
+    font-size: 200%;
+    width: 50%;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    height: 50%;
+    vertical-align: baseline;
+    top: 30%;
+    left: 50%;
+    position : absolute;
+    transform: translate(-50%,-50%);
+}
+
+.clock
+{
+    border: none;
+    outline: none;
+    width: 2ch;
+    font-size: 1em;
+    box-sizing: content-box;
+    text-align: center;
+    /*background-color: lightblue;*/
+    padding: 5px 15px 10px 15px;
+}
+#output{
+    font-size: 4em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 500px;
+    letter-spacing: 0.2ch;
+}
+
+span
+{
+    display: inline-block;
+    /*min-width: 2.35ch;*/
+    text-align: center;
+}
+
+input[type=button]{
+    font-size: 1rem;
+    padding: 0.3rem 0.8rem;
+}
+
+#inp
+{
+    border-bottom: solid 1px black    ;
+}
