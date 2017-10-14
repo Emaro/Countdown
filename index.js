@@ -1,22 +1,23 @@
-var targetTime;
-var timer;
-var ms;
+var timer
 
 function startCountdown() {
 
-    resetGlobals()
+    clearInterval(timer)
 
-    ms = getAsNumber("hh") * 60 * 60 * 1000;
+    var ms
+    ms = getAsNumber("hh") * 60 * 60 * 1000
     ms += getAsNumber("mm") * 60 * 1000;
     ms += getAsNumber("ss") * 1000;
 
-    targetTime += ms;
+    var now = new Date().getTime()
 
-    targetTime = new Date(targetTime);
+    var targetTimeInMs = now + ms
 
-    countToZero();
+    var targetTime = new Date(targetTimeInMs);
 
-    timer = setInterval(countToZero, 100);
+    countToZero(targetTime, timer);
+
+    timer = setInterval(countToZero, 100, targetTime, timer);
 }
 
 function getAsNumber(id) {
@@ -29,15 +30,9 @@ function getAsNumber(id) {
 function getValue(id) {
     return getElement(id).value
 }
+function countToZero(targetTime, timer) {
 
-function resetGlobals() {
-    timer = null
-    targetTime = new Date().getTime()
-}
-
-function countToZero() {
-
-    var dif = targetTime - new Date(); // ms
+    var dif = msLeftUntil(targetTime)
 
     if (dif <= 100) {
         getElement("output").innerHTML = getTimeString(0, 0, 0)
@@ -54,6 +49,10 @@ function countToZero() {
     var hour = Math.floor(dif);
 
     getElement("output").innerHTML = getTimeString(hour, min, sec)
+}
+
+function msLeftUntil(targetTime) {
+    return targetTime - new Date()
 }
 
 function getTimeString(h, m, s) {
