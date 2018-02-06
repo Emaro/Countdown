@@ -29,6 +29,7 @@ function getAsNumber(id) {
 function getValue(id) {
     return getElement(id).value
 }
+
 function countToZero(targetTime) {
 
     var dif = msLeftUntil(targetTime)
@@ -79,8 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function notifyMe() {
     if (Notification.permission !== "granted")
-    // Notification.requestPermission();
+    {
         alert("Countdown finished")
+    }
     else {
 
         var notification = new Notification('Countdown finished', {

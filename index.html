@@ -10,12 +10,17 @@
 
 
 <!-- BODY -->
+<div id="wrapper">
 
-<h1>Countdown</h1>
+    <h1>Countdown</h1>
 
-<p id="output">&nbsp;</p>
+    <p id="output">&nbsp;</p>
+    
+    <form action="">
+        <span id="inp"><input class="clock" id="hh" value="00" autofocus onfocus="this.select()">:<input class="clock" id="mm" value="25">:<input class="clock" id="ss" value="0"></span><br>
+        <input type="button" value="Go" onclick="startCountdown()">
+    </form>
 
-<form action="">
-    <span id="inp"><input class="clock" id="hh" value="00" autofocus onfocus="this.select()">:<input class="clock" id="mm" value="25">:<input class="clock" id="ss" value="0"></span><br>
-    <input type="button" value="Go" onclick="startCountdown()">
-</form>
+</div>
+
+<span class="corner"><a href="https://github.com/Emaro/Countdown" target="_blank">GitHub</a></span>
