@@ -1,8 +1,10 @@
-*{
+*
+{
     font-family: Georgia;
 }
 
-body
+
+#wrapper
 {
     font-size: 200%;
     width: 50%;
@@ -52,4 +54,23 @@ input[type=button]{
 #inp
 {
     border-bottom: solid 1px black    ;
+}
+
+.corner
+{
+    position: fixed;
+    bottom: 1em;
+    right: 1.5em;
+    font-size: 0.7em;
+}
+
+a
+{
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
 }

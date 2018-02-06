@@ -15,9 +15,8 @@ function startCountdown() {
 
     var targetTime = new Date(targetTimeInMs);
 
-    countToZero(targetTime, timer);
-
-    timer = setInterval(countToZero, 100, targetTime, timer);
+    countToZero(targetTime);
+    timer = setInterval(countToZero, 100, targetTime);
 }
 
 function getAsNumber(id) {
@@ -30,14 +29,15 @@ function getAsNumber(id) {
 function getValue(id) {
     return getElement(id).value
 }
-function countToZero(targetTime, timer) {
+
+function countToZero(targetTime) {
 
     var dif = msLeftUntil(targetTime)
 
     if (dif <= 100) {
         getElement("output").innerHTML = getTimeString(0, 0, 0)
-        notifyMe();
         clearInterval(timer);
+        notifyMe();
         return
     }
 
@@ -80,8 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function notifyMe() {
     if (Notification.permission !== "granted")
-    // Notification.requestPermission();
+    {
         alert("Countdown finished")
+    }
     else {
 
         var notification = new Notification('Countdown finished', {
@@ -90,7 +91,7 @@ function notifyMe() {
         });
 
         notification.onclick = function () {
-            window.open("")
+            // window.open("")
         }
     }
 }
