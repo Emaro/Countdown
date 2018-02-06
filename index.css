@@ -1,6 +1,8 @@
-*{
+*
+{
     font-family: Georgia;
 }
+
 
 #wrapper
 {
@@ -54,18 +56,21 @@ input[type=button]{
     border-bottom: solid 1px black    ;
 }
 
-.corner {
+.corner
+{
     position: fixed;
     bottom: 1em;
     right: 1.5em;
     font-size: 0.7em;
 }
 
-a {
+a
+{
     color: blue;
     text-decoration: none;
 }
 
-a:hover {
+a:hover
+{
     text-decoration: underline;
 }
