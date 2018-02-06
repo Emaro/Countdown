@@ -89,7 +89,7 @@ function notifyMe() {
         });
 
         notification.onclick = function () {
-            window.open("")
+            // window.open("")
         }
     }
 }
